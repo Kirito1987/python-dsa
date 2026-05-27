@@ -14,6 +14,7 @@ dsa_showcase/
 ├── bst.py            # Binary Search Tree
 ├── sorting.py        # Merge Sort, Bubble Sort, Binary Search
 ├── stack_queue.py    # Stack, Queue, and a classic use case
+├── patient_queue.py  # Patient Triage Priority Queue (Min-Heap)
 └── README.md
 ```
 
@@ -118,6 +119,38 @@ print(is_balanced("([)]"))      # False
 
 ---
 
+### `patient_queue.py` — Patient Triage Priority Queue
+A real-world simulation of a telehealth triage system built on a Min-Heap. Patients are prioritized by severity (1 = critical, 5 = routine), with arrival time as a tiebreaker. Demonstrates how priority queues power urgent, time-sensitive systems.
+
+| Operation         | Time Complexity |
+|------------------|----------------|
+| Add patient       | O(log n)       |
+| Next patient      | O(log n)       |
+| Peek at next      | O(1)           |
+| Check queue size  | O(1)           |
+
+```python
+from patient_queue import TriageQueue
+
+queue = TriageQueue()
+queue.add_patient("Maria Santos", 3, "Persistent headache")
+queue.add_patient("James Okafor", 1, "Chest pain")   # Critical — goes first
+queue.add_patient("Linda Chen",   4, "Sore throat")
+
+queue.display_queue()
+
+patient = queue.next_patient()
+print(f"Now seeing: {patient.name}")   # James Okafor — severity 1
+```
+
+**Key features:**
+- Min-heap ensures O(log n) insert and extract
+- FIFO tiebreaker when two patients share the same severity
+- Walk-in emergencies are re-prioritized instantly
+- Session stats tracking (waiting, seen, total registered)
+
+---
+
 ## 🚀 Running the Code
 
 Each file can be run directly to see a demo:
@@ -127,6 +160,7 @@ python linked_list.py
 python bst.py
 python sorting.py
 python stack_queue.py
+python patient_queue.py
 ```
 
 No external dependencies required — pure Python 3.
@@ -137,9 +171,11 @@ No external dependencies required — pure Python 3.
 
 - **Linear structures**: Linked List, Stack, Queue
 - **Tree structures**: Binary Search Tree with recursive algorithms
+- **Heap structures**: Min-Heap based Priority Queue
 - **Sorting**: Divide-and-conquer (Merge Sort) vs brute force (Bubble Sort)
 - **Searching**: Binary Search on sorted arrays
 - **Recursion**: Used throughout BST operations and Merge Sort
+- **Real-world application**: Patient triage system modeled on telehealth workflows
 - **Time & Space complexity analysis** documented on every function
 
 ---
